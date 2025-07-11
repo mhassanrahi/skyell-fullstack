@@ -57,7 +57,6 @@ backend/
 
 - The server runs on `http://localhost:8080`
 - Database migrations run automatically on startup
-- CORS is configured for React development server on `http://localhost:3000`
 
 ### API Endpoints
 
@@ -88,9 +87,3 @@ backend/
 #### Status
 - `GET /api/v1/status/urls` - Get all URLs status
 - `GET /api/v1/status/url/:id` - Get specific URL status
-
-### Testing
-
-```bash
-go test ./...
-``` 

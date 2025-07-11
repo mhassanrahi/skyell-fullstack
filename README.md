@@ -2,7 +2,7 @@
 
 A full-stack web application for crawling and analyzing websites, built with **React** (frontend) and **Go** (backend).
 
-## 📋 **Project Overview**
+## **Project Overview**
 
 This application allows users to:
 - **Add URLs** for crawling and analysis
@@ -12,7 +12,7 @@ This application allows users to:
 - **Bulk operations** for managing multiple URLs
 - **Real-time status updates** during crawling operations
 
-## 🚀 **Tech Stack**
+## **Tech Stack**
 
 ### **Frontend**
 - **React 19** with TypeScript
@@ -31,7 +31,7 @@ This application allows users to:
 - **CORS** support
 - **RESTful API** design
 
-## 📦 **Installation & Setup**
+## **Installation & Setup**
 
 ### **Prerequisites**
 - **Node.js** (v18 or higher)
@@ -83,7 +83,7 @@ npm run dev
 
 The frontend will start on `http://localhost:3005`
 
-## 🎯 **Features**
+## **Features**
 
 ### **Core Functionality**
 - ✅ **URL Management** - Add, delete, and manage URLs
