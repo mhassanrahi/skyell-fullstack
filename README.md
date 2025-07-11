@@ -1,4 +1,4 @@
-# 🕷️ Skyell URL Crawler
+# Skyell URL Crawler
 
 A full-stack web application for crawling and analyzing websites, built with **React** (frontend) and **Go** (backend).
 
@@ -174,34 +174,8 @@ All API requests require JWT authentication via `Authorization: Bearer <token>` 
 - `POST /api/v1/auth/login` - Login
 - `POST /api/v1/auth/register` - Register
 
-### **Project Structure**
 
-```
-skyell/
-├── backend/
-│   ├── cmd/               # Application entrypoints
-│   ├── internal/          # Private application code
-│   │   ├── auth/          # Authentication logic
-│   │   ├── crawler/       # Web crawling engine
-│   │   ├── database/      # Database models and migrations
-│   │   ├── handlers/      # HTTP handlers
-│   │   └── middleware/    # HTTP middleware
-│   ├── pkg/               # Public packages
-│   ├── go.mod
-│   └── main.go
-├── frontend/
-│   ├── src/
-│   │   ├── components/    # React components
-│   │   ├── pages/         # Page components
-│   │   ├── services/      # API services
-│   │   ├── types/         # TypeScript types
-│   │   └── test/          # Test utilities
-│   ├── package.json
-│   └── vite.config.ts
-└── README.md
-```
-
-## 🧪 **Testing**
+## **Testing**
 
 ### **Frontend Testing**
 ```bash
@@ -222,61 +196,3 @@ npm run test:ui
 - Form validation and submission
 - API integration and error handling
 - Accessibility and keyboard navigation
-
-### **Backend Testing**
-```bash
-cd backend
-
-# Run all tests
-go test ./...
-
-# Run tests with coverage
-go test -cover ./...
-
-# Run specific test
-go test ./internal/crawler
-```
-
-## 🔒 **Security**
-
-- **JWT Authentication** for API access
-- **Input Validation** on all endpoints
-- **SQL Injection Prevention** with GORM
-- **XSS Protection** with proper data sanitization
-- **CORS Configuration** for cross-origin requests
-
-## 📊 **Performance**
-
-- **Concurrent Crawling** with Go goroutines
-- **Database Indexing** for fast queries
-- **Frontend Caching** with React Query
-- **Smart Polling** - adaptive refresh rates
-- **Code Splitting** for faster loading
-
-## 🚀 **Deployment**
-
-### **Backend Deployment**
-```bash
-# Build binary
-go build -o skyell main.go
-
-# Run with environment variables
-DB_HOST=localhost DB_PORT=3306 DB_NAME=skyell_prod ./skyell
-```
-
-### **Frontend Deployment**
-```bash
-# Build for production
-npm run build
-
-# Deploy the dist/ directory to your hosting platform
-```
-
-## 📈 **Future Enhancements**
-
-- **WebSocket Support** for real-time updates
-- **Advanced Analytics** - SEO analysis, performance metrics
-- **Export Functionality** - PDF/CSV reports
-- **Scheduling** - Automated crawling schedules
-- **User Management** - Role-based access control
-- **API Rate Limiting** - Prevent abuse
