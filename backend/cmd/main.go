@@ -4,6 +4,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"skyell-backend/internal/api"
 	"skyell-backend/internal/database"
@@ -35,7 +36,12 @@ func main() {
 
 	// CORS middleware
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3005"} // React dev server
+	allowedOrigins := os.Getenv("ALLOWED_ORIGINS")
+	if allowedOrigins == "" {
+		allowedOrigins = "http://localhost:3005" // Default for local development
+	}
+
+	config.AllowOrigins = strings.Split(allowedOrigins, ",")
 	config.AllowCredentials = true
 	config.AllowHeaders = []string{"Origin", "Content-Length", "Content-Type", "Authorization"}
 	r.Use(cors.New(config))
@@ -43,7 +49,7 @@ func main() {
 	// Health check endpoint
 	r.GET("/health", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"status": "ok",
+			"status":  "ok",
 			"message": "Skyell Backend API is running",
 		})
 	})
@@ -61,4 +67,4 @@ func main() {
 	if err := r.Run(":" + port); err != nil {
 		log.Fatal("Failed to start server:", err)
 	}
-} 
+}
