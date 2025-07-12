@@ -5,7 +5,7 @@ interface Config {
 }
 
 const config: Config = {
-  apiUrl: import.meta.env.VITE_API_URL,
+  apiUrl: import.meta.env.VITE_API_BASE_URL,
   appName: "Skyell URL Crawler",
   version: "1.0.0",
 };
