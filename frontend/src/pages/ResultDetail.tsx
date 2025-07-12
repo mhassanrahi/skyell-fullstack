@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import {
   ArrowLeft,
@@ -30,12 +31,11 @@ import {
 import apiService from "../services/api";
 import { CrawlResult } from "../types";
 
-interface ResultDetailProps {
-  resultId: number;
-  onBack: () => void;
-}
+const ResultDetail: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-const ResultDetail: React.FC<ResultDetailProps> = ({ resultId, onBack }) => {
+  const resultId = id ? parseInt(id, 10) : 0;
   const [linksPage, setLinksPage] = useState(1);
   const [linksFilter, setLinksFilter] = useState<
     "all" | "internal" | "external" | "broken"
@@ -151,7 +151,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ resultId, onBack }) => {
               : "Failed to load result details"}
           </p>
           <button
-            onClick={onBack}
+            onClick={() => navigate("/results")}
             className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
           >
             Back to Results
@@ -170,7 +170,7 @@ const ResultDetail: React.FC<ResultDetailProps> = ({ resultId, onBack }) => {
       <div className="bg-white rounded-lg shadow-sm border p-6">
         <div className="flex items-center justify-between mb-4">
           <button
-            onClick={onBack}
+            onClick={() => navigate("/results")}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
           >
             <ArrowLeft className="w-5 h-5" />

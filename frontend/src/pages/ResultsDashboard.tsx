@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   Search,
@@ -17,13 +18,12 @@ import { CrawlResult, ResultsFilter, PaginatedResponse } from "../types";
 
 interface ResultsDashboardProps {
   className?: string;
-  onViewDetails?: (resultId: number) => void;
 }
 
 const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
   className = "",
-  onViewDetails,
 }) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
   const [selectedResults, setSelectedResults] = useState<number[]>([]);
@@ -476,7 +476,7 @@ const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
-                          onClick={() => onViewDetails?.(result.id)}
+                          onClick={() => navigate(`/results/${result.id}`)}
                           className="text-primary-600 hover:text-primary-900 inline-flex items-center"
                         >
                           <Eye className="w-4 h-4 mr-1" />

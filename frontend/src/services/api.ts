@@ -49,9 +49,7 @@ class APIService {
             await this.refreshToken();
             return this.api(originalRequest);
           } catch (refreshError) {
-            // Refresh failed, redirect to login
             this.logout();
-            window.location.href = "/login";
             return Promise.reject(refreshError);
           }
         }
