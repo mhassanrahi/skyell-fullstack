@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { LogOut, Plus, BarChart3 } from "lucide-react";
 import URLManagement from "./pages/URLManagement";
