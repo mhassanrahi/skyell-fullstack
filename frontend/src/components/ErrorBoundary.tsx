@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import { Component, ErrorInfo, ReactNode } from "react";
 import { AlertTriangle, RefreshCw, Home } from "lucide-react";
 
 interface Props {
@@ -82,17 +82,18 @@ class ErrorBoundary extends Component<Props, State> {
               </button>
             </div>
 
-            {process.env.NODE_ENV === "development" && this.state.error && (
-              <details className="mt-6 p-4 bg-red-50 rounded-md">
-                <summary className="cursor-pointer text-sm font-medium text-red-800 mb-2">
-                  Error Details (Development)
-                </summary>
-                <pre className="text-xs text-red-700 overflow-auto">
-                  {this.state.error.toString()}
-                  {this.state.errorInfo?.componentStack}
-                </pre>
-              </details>
-            )}
+            {import.meta.env.VITE_NODE_ENV === "development" &&
+              this.state.error && (
+                <details className="mt-6 p-4 bg-red-50 rounded-md">
+                  <summary className="cursor-pointer text-sm font-medium text-red-800 mb-2">
+                    Error Details (Development)
+                  </summary>
+                  <pre className="text-xs text-red-700 overflow-auto">
+                    {this.state.error.toString()}
+                    {this.state.errorInfo?.componentStack}
+                  </pre>
+                </details>
+              )}
           </div>
         </div>
       );
