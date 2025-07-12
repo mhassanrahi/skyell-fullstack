@@ -64,12 +64,23 @@ class APIService {
     const response: AxiosResponse<APIResponse<AuthTokens>> =
       await this.api.post("/auth/login", credentials);
 
+    console.log(`auth/login starts`);
+    console.log(`response: ${JSON.stringify(response)}`);
+    console.log(`response?.data: ${JSON.stringify(response?.data)}`);
+    console.log(`response?.data?.success: ${response?.data?.success}`);
+    console.log(
+      `response?.data?.data: ${JSON.stringify(response?.data?.data)}`
+    );
+    console.log(`response?.data?.message: ${response?.data?.message}`);
+
     if (response.data.success && response.data.data) {
       const tokens = response.data.data;
       localStorage.setItem("access_token", tokens.access_token);
       localStorage.setItem("refresh_token", tokens.refresh_token);
       return tokens;
     }
+
+    console.log(`auth/login ends`);
 
     throw new Error(response.data.message || "Login failed");
   }
@@ -78,12 +89,22 @@ class APIService {
     const response: AxiosResponse<APIResponse<AuthTokens>> =
       await this.api.post("/auth/register", credentials);
 
+    console.log(`auth/register starts`);
+    console.log(`response: ${JSON.stringify(response)}`);
+    console.log(`response?.data: ${JSON.stringify(response?.data)}`);
+    console.log(`response?.data?.success: ${response?.data?.success}`);
+    console.log(
+      `response?.data?.data: ${JSON.stringify(response?.data?.data)}`
+    );
+
     if (response.data.success && response.data.data) {
       const tokens = response.data.data;
       localStorage.setItem("access_token", tokens.access_token);
       localStorage.setItem("refresh_token", tokens.refresh_token);
       return tokens;
     }
+
+    console.log(`auth/register ends`);
 
     throw new Error(response.data.message || "Registration failed");
   }
@@ -99,12 +120,23 @@ class APIService {
         refresh_token: refreshToken,
       });
 
+    console.log(`auth/refresh starts`);
+    console.log(`response: ${JSON.stringify(response)}`);
+    console.log(`response?.data: ${JSON.stringify(response?.data)}`);
+    console.log(`response?.data?.success: ${response?.data?.success}`);
+    console.log(
+      `response?.data?.data: ${JSON.stringify(response?.data?.data)}`
+    );
+    console.log(`response?.data?.message: ${response?.data?.message}`);
+
     if (response.data.success && response.data.data) {
       const tokens = response.data.data;
       localStorage.setItem("access_token", tokens.access_token);
       localStorage.setItem("refresh_token", tokens.refresh_token);
       return tokens;
     }
+
+    console.log(`auth/refresh ends`);
 
     throw new Error("Token refresh failed");
   }
