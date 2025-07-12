@@ -2,6 +2,10 @@
 
 A full-stack web application for crawling and analyzing websites, built with **React** (frontend) and **Go** (backend).
 
+## Demo
+
+Click [here](https://skyell-fullstack.vercel.app/) to see a live demo of the application.
+
 ## **Project Overview**
 
 This application allows users to:
