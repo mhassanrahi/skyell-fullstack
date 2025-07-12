@@ -152,7 +152,7 @@ const ResultDetail: React.FC = () => {
           </p>
           <button
             onClick={() => navigate("/results")}
-            className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700"
+            className="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 cursor-pointer"
           >
             Back to Results
           </button>
@@ -171,7 +171,7 @@ const ResultDetail: React.FC = () => {
         <div className="flex items-center justify-between mb-4">
           <button
             onClick={() => navigate("/results")}
-            className="flex items-center gap-2 text-gray-600 hover:text-gray-900"
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 cursor-pointer"
           >
             <ArrowLeft className="w-5 h-5" />
             Back to Results

@@ -23,7 +23,9 @@ const MainLayout: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <h1 className="text-xl font-bold text-gray-900">
-                Skyell URL Crawler
+                <Link to="/" className="cursor-pointer">
+                  Skyell URL Crawler
+                </Link>
               </h1>
             </div>
 
@@ -57,7 +59,7 @@ const MainLayout: React.FC = () => {
             <div className="hidden md:flex items-center">
               <button
                 onClick={handleLogout}
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-md transition-colors cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
                 Logout
@@ -108,7 +110,7 @@ const MainLayout: React.FC = () => {
               </Link>
               <button
                 onClick={handleLogout}
-                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors cursor-pointer"
               >
                 Logout
               </button>

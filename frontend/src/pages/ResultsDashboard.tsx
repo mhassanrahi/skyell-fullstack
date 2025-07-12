@@ -477,7 +477,7 @@ const ResultsDashboard: React.FC<ResultsDashboardProps> = ({
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <button
                           onClick={() => navigate(`/results/${result.id}`)}
-                          className="text-primary-600 hover:text-primary-900 inline-flex items-center"
+                          className="text-primary-600 hover:text-primary-900 inline-flex items-center cursor-pointer"
                         >
                           <Eye className="w-4 h-4 mr-1" />
                           View

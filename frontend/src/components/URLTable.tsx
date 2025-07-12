@@ -298,7 +298,7 @@ const URLTable: React.FC<URLTableProps> = ({ className = "" }) => {
                   status: e.target.value as any,
                 }))
               }
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 cursor-pointer"
             >
               <option value="all">All Status</option>
               <option value="queued">Queued</option>
@@ -320,7 +320,7 @@ const URLTable: React.FC<URLTableProps> = ({ className = "" }) => {
                 <button
                   onClick={handleBulkStart}
                   disabled={bulkStartMutation.isPending}
-                  className="inline-flex items-center gap-1 px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 disabled:opacity-50"
+                  className="inline-flex items-center gap-1 px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700 disabled:opacity-50 cursor-pointer"
                 >
                   <Play className="w-3 h-3" />
                   Start
@@ -328,7 +328,7 @@ const URLTable: React.FC<URLTableProps> = ({ className = "" }) => {
                 <button
                   onClick={handleBulkStop}
                   disabled={bulkStopMutation.isPending}
-                  className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 disabled:opacity-50"
+                  className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-600 text-white text-sm rounded hover:bg-yellow-700 disabled:opacity-50 cursor-pointer"
                 >
                   <Square className="w-3 h-3" />
                   Stop
@@ -440,7 +440,7 @@ const URLTable: React.FC<URLTableProps> = ({ className = "" }) => {
                       <button
                         onClick={() => handleStartCrawl(url.id)}
                         disabled={startCrawlMutation.isPending}
-                        className="inline-flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700 disabled:opacity-50"
+                        className="inline-flex items-center gap-1 px-2 py-1 bg-green-600 text-white text-xs rounded hover:bg-green-700 disabled:opacity-50 cursor-pointer"
                         title="Start crawling"
                       >
                         <Play className="w-3 h-3" />
@@ -450,7 +450,7 @@ const URLTable: React.FC<URLTableProps> = ({ className = "" }) => {
                     <button
                       onClick={() => handleDelete(url.id)}
                       disabled={deleteMutation.isPending}
-                      className="inline-flex items-center gap-1 px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700 disabled:opacity-50"
+                      className="inline-flex items-center gap-1 px-2 py-1 bg-red-600 text-white text-xs rounded hover:bg-red-700 disabled:opacity-50 cursor-pointer"
                       title="Delete URL"
                     >
                       <Trash2 className="w-3 h-3" />

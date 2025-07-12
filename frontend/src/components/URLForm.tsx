@@ -144,7 +144,7 @@ const URLForm: React.FC<URLFormProps> = ({ className = "" }) => {
               transition-all duration-200 shadow-sm
               ${
                 isValid && !addURLMutation.isPending
-                  ? "bg-blue-600 hover:bg-blue-700 text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  ? "bg-blue-600 hover:bg-blue-700 text-white focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 cursor-pointer"
                   : "bg-gray-300 text-gray-500 cursor-not-allowed"
               }
             `}
