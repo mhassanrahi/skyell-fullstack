@@ -42,7 +42,15 @@ class APIService {
       async (error) => {
         const originalRequest = error.config;
 
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        // Don't try to refresh tokens for authentication endpoints
+        const isAuthEndpoint = originalRequest.url?.includes("/auth/");
+
+        if (
+          error.response?.status === 401 &&
+          !originalRequest._retry &&
+          !isAuthEndpoint &&
+          this.isAuthenticated()
+        ) {
           originalRequest._retry = true;
 
           try {
@@ -61,52 +69,53 @@ class APIService {
 
   // Auth methods
   async login(credentials: LoginCredentials): Promise<AuthTokens> {
-    const response: AxiosResponse<APIResponse<AuthTokens>> =
-      await this.api.post("/auth/login", credentials);
+    try {
+      const response: AxiosResponse<APIResponse<AuthTokens>> =
+        await this.api.post("/auth/login", credentials);
 
-    console.log(`auth/login starts`);
-    console.log(`response: ${JSON.stringify(response)}`);
-    console.log(`response?.data: ${JSON.stringify(response?.data)}`);
-    console.log(`response?.data?.success: ${response?.data?.success}`);
-    console.log(
-      `response?.data?.data: ${JSON.stringify(response?.data?.data)}`
-    );
-    console.log(`response?.data?.message: ${response?.data?.message}`);
+      if (response.data.success && response.data.data) {
+        const tokens = response.data.data;
+        localStorage.setItem("access_token", tokens.access_token);
+        localStorage.setItem("refresh_token", tokens.refresh_token);
+        return tokens;
+      }
 
-    if (response.data.success && response.data.data) {
-      const tokens = response.data.data;
-      localStorage.setItem("access_token", tokens.access_token);
-      localStorage.setItem("refresh_token", tokens.refresh_token);
-      return tokens;
+      throw new Error(response.data.message || "Login failed");
+    } catch (error: any) {
+      // Handle different types of errors
+      if (error.response?.data?.message) {
+        throw new Error(error.response.data.message);
+      } else if (error.message) {
+        throw new Error(error.message);
+      } else {
+        throw new Error("Login failed. Please check your credentials.");
+      }
     }
-
-    console.log(`auth/login ends`);
-
-    throw new Error(response.data.message || "Login failed");
   }
 
   async register(credentials: RegisterCredentials): Promise<AuthTokens> {
-    const response: AxiosResponse<APIResponse<AuthTokens>> =
-      await this.api.post("/auth/register", credentials);
+    try {
+      const response: AxiosResponse<APIResponse<AuthTokens>> =
+        await this.api.post("/auth/register", credentials);
 
-    console.log(`auth/register starts`);
-    console.log(`response: ${JSON.stringify(response)}`);
-    console.log(`response?.data: ${JSON.stringify(response?.data)}`);
-    console.log(`response?.data?.success: ${response?.data?.success}`);
-    console.log(
-      `response?.data?.data: ${JSON.stringify(response?.data?.data)}`
-    );
+      if (response.data.success && response.data.data) {
+        const tokens = response.data.data;
+        localStorage.setItem("access_token", tokens.access_token);
+        localStorage.setItem("refresh_token", tokens.refresh_token);
+        return tokens;
+      }
 
-    if (response.data.success && response.data.data) {
-      const tokens = response.data.data;
-      localStorage.setItem("access_token", tokens.access_token);
-      localStorage.setItem("refresh_token", tokens.refresh_token);
-      return tokens;
+      throw new Error(response.data.message || "Registration failed");
+    } catch (error: any) {
+      // Handle different types of errors
+      if (error.response?.data?.message) {
+        throw new Error(error.response.data.message);
+      } else if (error.message) {
+        throw new Error(error.message);
+      } else {
+        throw new Error("Registration failed. Please try again.");
+      }
     }
-
-    console.log(`auth/register ends`);
-
-    throw new Error(response.data.message || "Registration failed");
   }
 
   async refreshToken(): Promise<AuthTokens> {
@@ -120,23 +129,12 @@ class APIService {
         refresh_token: refreshToken,
       });
 
-    console.log(`auth/refresh starts`);
-    console.log(`response: ${JSON.stringify(response)}`);
-    console.log(`response?.data: ${JSON.stringify(response?.data)}`);
-    console.log(`response?.data?.success: ${response?.data?.success}`);
-    console.log(
-      `response?.data?.data: ${JSON.stringify(response?.data?.data)}`
-    );
-    console.log(`response?.data?.message: ${response?.data?.message}`);
-
     if (response.data.success && response.data.data) {
       const tokens = response.data.data;
       localStorage.setItem("access_token", tokens.access_token);
       localStorage.setItem("refresh_token", tokens.refresh_token);
       return tokens;
     }
-
-    console.log(`auth/refresh ends`);
 
     throw new Error("Token refresh failed");
   }

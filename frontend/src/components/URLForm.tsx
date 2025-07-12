@@ -15,10 +15,40 @@ const schema = yup.object({
     .test("valid-url", "Please enter a valid URL", function (value) {
       if (!value) return false;
 
-      // Allow URLs with or without protocol
-      const urlPattern =
-        /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-      return urlPattern.test(value);
+      // Clean the URL by adding protocol if missing
+      let testUrl = value.trim();
+      if (!testUrl.match(/^https?:\/\//)) {
+        testUrl = `https://${testUrl}`;
+      }
+
+      // Use URL constructor for robust validation
+      try {
+        const url = new URL(testUrl);
+
+        // Additional checks for valid hostname
+        const hostname = url.hostname;
+
+        // Must have at least one dot for domain.tld format
+        if (!hostname.includes(".")) {
+          return false;
+        }
+
+        // Must end with a valid TLD (at least 2 characters)
+        const tldMatch = hostname.match(/\.([a-z]{2,})$/i);
+        if (!tldMatch) {
+          return false;
+        }
+
+        // Must not be just numbers or invalid characters
+        const domainParts = hostname.split(".");
+        if (domainParts.some((part) => part.length === 0)) {
+          return false;
+        }
+
+        return true;
+      } catch (error) {
+        return false;
+      }
     }),
 });
 
@@ -78,7 +108,7 @@ const URLForm: React.FC<URLFormProps> = ({ className = "" }) => {
           </label>
           <div className="relative">
             <input
-              type="url"
+              type="text"
               id="url"
               placeholder="Enter website URL (e.g., www.google.com or https://example.com)"
               {...register("url")}
