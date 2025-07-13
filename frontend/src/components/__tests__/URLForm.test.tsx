@@ -93,7 +93,7 @@ describe("URLForm", () => {
     const urlInput = screen.getByLabelText(/website url/i);
     const submitButton = screen.getByRole("button", { name: /add url/i });
 
-    expect(urlInput).toHaveAttribute("type", "url");
+    expect(urlInput).toHaveAttribute("type", "text");
     expect(submitButton).toHaveAttribute("type", "submit");
   });
 });

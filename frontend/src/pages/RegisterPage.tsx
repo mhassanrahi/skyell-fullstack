@@ -6,18 +6,22 @@ import * as yup from "yup";
 import { UserPlus, Loader2, Eye, EyeOff, AlertCircle } from "lucide-react";
 import apiService from "../services/api";
 import { RegisterCredentials } from "../types";
+import { ERROR_MESSAGES } from "../constants/";
 
 const schema = yup.object({
-  username: yup.string().required("Username is required"),
-  email: yup.string().email("Invalid email").required("Email is required"),
+  username: yup.string().required(ERROR_MESSAGES.USERNAME_REQUIRED),
+  email: yup
+    .string()
+    .email(ERROR_MESSAGES.INVALID_EMAIL)
+    .required(ERROR_MESSAGES.EMAIL_REQUIRED),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .min(6, ERROR_MESSAGES.INVALID_PASSWORD)
+    .required(ERROR_MESSAGES.PASSWORD_REQUIRED),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Please confirm your password"),
+    .oneOf([yup.ref("password")], ERROR_MESSAGES.INVALID_CONFIRM_PASSWORD)
+    .required(ERROR_MESSAGES.CONFIRM_PASSWORD_REQUIRED),
 });
 
 const RegisterPage: React.FC = () => {
