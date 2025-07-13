@@ -43,7 +43,7 @@ const RegisterPage: React.FC = () => {
     setError("");
 
     try {
-      const { confirmPassword, ...registerData } = data;
+      const { confirmPassword: _confirmPassword, ...registerData } = data;
       await apiService.register(registerData);
       navigate("/");
     } catch (err) {

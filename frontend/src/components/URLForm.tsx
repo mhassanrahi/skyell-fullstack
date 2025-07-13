@@ -46,7 +46,7 @@ const schema = yup.object({
         }
 
         return true;
-      } catch (error) {
+      } catch {
         return false;
       }
     }),
