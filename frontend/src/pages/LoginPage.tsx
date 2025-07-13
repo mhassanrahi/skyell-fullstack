@@ -6,13 +6,17 @@ import * as yup from "yup";
 import { LogIn, Loader2, Eye, EyeOff, AlertCircle } from "lucide-react";
 import apiService from "../services/api";
 import { LoginCredentials } from "../types";
+import { ERROR_MESSAGES } from "../constants";
 
 const schema = yup.object({
-  email: yup.string().email("Invalid email").required("Email is required"),
+  email: yup
+    .string()
+    .email(ERROR_MESSAGES.INVALID_EMAIL)
+    .required(ERROR_MESSAGES.EMAIL_REQUIRED),
   password: yup
     .string()
-    .min(6, "Password must be at least 6 characters")
-    .required("Password is required"),
+    .min(6, ERROR_MESSAGES.INVALID_PASSWORD)
+    .required(ERROR_MESSAGES.PASSWORD_REQUIRED),
 });
 
 const LoginPage: React.FC = () => {
@@ -38,7 +42,9 @@ const LoginPage: React.FC = () => {
       await apiService.login(data);
       navigate("/");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Login failed");
+      setError(
+        err instanceof Error ? err.message : ERROR_MESSAGES.LOGIN_FAILED
+      );
     } finally {
       setIsLoading(false);
     }

@@ -6,13 +6,14 @@ import * as yup from "yup";
 import { Plus, Loader2, CheckCircle, AlertCircle } from "lucide-react";
 import apiService from "../services/api";
 import { URLFormData } from "../types";
+import { ERROR_MESSAGES } from "../constants";
 
 // Validation schema
 const schema = yup.object({
   url: yup
     .string()
-    .required("URL is required")
-    .test("valid-url", "Please enter a valid URL", function (value) {
+    .required(ERROR_MESSAGES.URL_REQUIRED)
+    .test("valid-url", ERROR_MESSAGES.INVALID_URL, function (value) {
       if (!value) return false;
 
       // Clean the URL by adding protocol if missing

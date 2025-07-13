@@ -11,6 +11,7 @@ import {
   URLFormData,
   CrawlStatus,
 } from "../types";
+import { ERROR_MESSAGES } from "../constants";
 
 class APIService {
   private api: AxiosInstance;
@@ -80,7 +81,7 @@ class APIService {
         return tokens;
       }
 
-      throw new Error(response.data.message || "Login failed");
+      throw new Error(response.data.message || ERROR_MESSAGES.LOGIN_FAILED);
     } catch (error: any) {
       // Handle different types of errors
       if (error.response?.data?.message) {
